@@ -34,7 +34,7 @@ const Menu = styled.li`
   align-items: center;
   height: 62px;
   flex-shrink: 0;
-  &:not(:first-child) {
+  &:not(:first-of-type) {
     margin-left: 24px;
   }
 `;

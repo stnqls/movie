@@ -1,6 +1,6 @@
 import axiosInstance from "./index";
 
-export const latesApi = () => axiosInstance.get("/movie/latest");
+export const latestApi = () => axiosInstance.get("/movie/latest");
 
 export const upcomingApi = () => axiosInstance.get("/movie/upcoming");
 
