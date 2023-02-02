@@ -10,8 +10,10 @@ interface Props {
 }
 
 const ArrowButton = styled.button<{ pos?: "left" | "right" }>`
+  position: absolute;
   padding: 16px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  border: none;
   border-radius: 50%;
   z-index: 1;
   top: 50%;
@@ -46,7 +48,7 @@ const DEFAULT_SETTINGS: Settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 5,
-  slidesToScroll: 5,
+  slidesToScroll: 1,
   swipe: true,
   draggable: true,
   prevArrow: (

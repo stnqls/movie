@@ -19,7 +19,6 @@ const TopRateSection = () => {
   const { data, isLoading } = useTopRateMovie();
 
   const getYear = (date: string) => date.split("-")[0];
-  console.log(data);
   return (
     <Base>
       <Title>최고 평점</Title>

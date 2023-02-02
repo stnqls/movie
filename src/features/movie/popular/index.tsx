@@ -19,7 +19,6 @@ const PopularSection = () => {
   const { data, isLoading } = usePopularMovie();
 
   const getYear = (date: string) => date.split("-")[0];
-  console.log(data);
   return (
     <Base>
       <Title>인기상영작</Title>

@@ -19,7 +19,6 @@ const UpcomingSection = () => {
   const { data, isLoading } = useUpcomingMovie();
 
   const getYear = (date: string) => date.split("-")[0];
-  console.log(data);
   return (
     <Base>
       <Title>개봉 예정작</Title>

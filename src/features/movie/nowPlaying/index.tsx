@@ -19,7 +19,7 @@ const NowPlayingSection = () => {
   const { data, isLoading } = useNowPlayingMovie();
 
   const getYear = (date: string) => date.split("-")[0];
-  // console.log(data?.data.results);
+
   return (
     <Base>
       <Title>현재 상영중</Title>
@@ -32,7 +32,7 @@ const NowPlayingSection = () => {
               key={movie.id}
               linkUrl={`/movie/${movie.id}`}
               title={movie.title}
-              posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}/${movie.poster_path}`}
+              posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}${movie.poster_path}`}
               voteAverage={movie.vote_average}
               year={getYear(movie.release_date)}
             />

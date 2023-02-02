@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import "slick-carousel/slick/slick.css";
 
 interface Props {
   linkUrl: string;
@@ -80,7 +81,10 @@ const Card: React.FC<Props> = ({
   <StyledLink to={linkUrl}>
     <Base>
       <ImageWrapper>
-        <Image src={posterPath} alt={`${title} 의 포스터`} />
+        <Image
+          src={`${posterPath}`}
+          alt={`${title} 의 포스터 posterPath=null`}
+        />
       </ImageWrapper>
       <Info>
         <Title>{title}</Title>

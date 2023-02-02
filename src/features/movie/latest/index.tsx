@@ -19,6 +19,10 @@ const LatestMoviesSection = () => {
 
   const getYear = (date: string) => date.split("-")[0];
 
+  if (data?.data.poster_path === null) {
+    // const moviePoster = getPosterApi();
+  }
+
   return (
     <Base>
       <Title>최근 개봉작</Title>
@@ -28,7 +32,11 @@ const LatestMoviesSection = () => {
         <Card
           linkUrl={`/movie/${data.data.id}`}
           title={data.data.title}
-          posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.data.poster_path}`}
+          posterPath={`${
+            data.data.poster_path
+              ? process.env.REACT_APP_IMAGE_PREFIX + data.data.poster_path
+              : null
+          }`}
           voteAverage={data.data.vote_average}
           year={getYear(data.data.release_date)}
         />
