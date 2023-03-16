@@ -75,6 +75,22 @@ export interface Review {
   url: string;
 }
 
+export interface Trending {
+  backdrop_path: string;
+  id: number;
+  title: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+  popularity: number;
+  poster_path: string;
+  overview: string;
+  original_title: string;
+  original_language: string;
+  name: string;
+  first_air_date: string;
+}
+
 interface TV {
   id: number;
   name: string;

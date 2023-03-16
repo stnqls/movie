@@ -7,6 +7,7 @@ import TvDetail from "./pages/TvDetail";
 import MovieDetail from "./pages/MovieDetail";
 import TvReview from "./pages/TvReview";
 import MovieReview from "./pages/MovieReview";
+import MoviePage from "./pages/MoviePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/tv" element={<TvPage />} />
         <Route path="/movie/:id/reviews" element={<MovieReview />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/movie" element={<MoviePage />} />
       </Routes>
     </Router>
   );

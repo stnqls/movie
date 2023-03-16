@@ -21,3 +21,5 @@ export const searchApi = (query: string) =>
 
 export const reviewApi = (movieId: string) =>
   axiosInstance.get(`/movie/${movieId}/reviews`);
+
+export const trendingApi = () => axiosInstance.get("/trending/movie/week");

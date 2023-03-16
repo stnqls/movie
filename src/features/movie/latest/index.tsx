@@ -18,10 +18,6 @@ const LatestMoviesSection = () => {
 
   const getYear = (date: string) => date.split("-")[0];
 
-  if (data?.data.poster_path === null) {
-    // const moviePoster = getPosterApi();
-  }
-
   return (
     <Base>
       <Title>최근 개봉작</Title>

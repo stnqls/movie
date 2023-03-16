@@ -4,36 +4,37 @@ const Base = styled.footer`
   display: block;
   box-sizing: border-box;
   width: 100%;
+  height: 100px;
 `;
 
 const Section = styled.section`
   background-color: #1c1d1f;
 `;
 
-const Statistics = styled.section`
-  background: #101113;
-  width: 100%;
-  height: 62px;
-  line-height: 62px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const Statistics = styled.section`
+//   background: #101113;
+//   width: 100%;
+//   height: 62px;
+//   line-height: 62px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
-const Summary = styled.span`
-  color: #d1d1d2;
-  font-size: 19px;
-  font-weight: 500;
-  line-height: 22px;
-  text-align: center;
-`;
+// const Summary = styled.span`
+//   color: #d1d1d2;
+//   font-size: 19px;
+//   font-weight: 500;
+//   line-height: 22px;
+//   text-align: center;
+// `;
 
-const Emphasis = styled.em`
-  color: #ff0558;
-  font-size: 19px;
-  font-weight: 500;
-  line-height: 22px;
-`;
+// const Emphasis = styled.em`
+//   color: #ff0558;
+//   font-size: 19px;
+//   font-weight: 500;
+//   line-height: 22px;
+// `;
 
 const Container = styled.section`
   background: #1c1d1f;
@@ -83,13 +84,13 @@ const Footer = () => {
   return (
     <Base>
       <Section>
-        <Statistics>
+        {/* <Statistics>
           <Summary>
             지금까지&nbsp;
             <Emphasis>* 644,934,343 개의 평가가</Emphasis>
             &nbsp;쌓였습니다.
           </Summary>
-        </Statistics>
+        </Statistics> */}
         <Container>
           <ContentWrapper>
             <Left>

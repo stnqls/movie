@@ -224,8 +224,8 @@ const Header: React.FC<Props> = () => {
               </Link>
             </Menu>
             <Menu>
-              <Link href="/">
-                <MenuButton active={pathname === "/"}>영화</MenuButton>
+              <Link href="/movie">
+                <MenuButton active={pathname === "/movie"}>영화</MenuButton>
               </Link>
             </Menu>
             <Menu>
@@ -253,7 +253,6 @@ const Header: React.FC<Props> = () => {
                     <Link
                       href={`/movie/${searchResultItem.id}`}
                       key={searchResultItem.id}
-                      onClick={() => console.log(searchResultItem.id)}
                     >
                       <SearchResultListItem>
                         {searchResultItem.title}

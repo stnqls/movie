@@ -20,3 +20,5 @@ export const searchTvApi = (query: string) =>
 
 export const reviewApi = (tvId: string) =>
   axiosInstance.get(`/tv/${tvId}/reviews`);
+
+export const trendingApi = () => axiosInstance.get("/trending/tv/week");

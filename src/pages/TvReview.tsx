@@ -79,7 +79,6 @@ type Params = {
 const TvReview: React.FC = () => {
   const { id } = useParams<Params>();
   const { isLoading, data } = useTvReview(id!);
-  console.log(data);
   interface Props {
     authorName: string;
     authorImg: string;
