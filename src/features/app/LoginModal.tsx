@@ -36,7 +36,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.h4`
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
   text-align: center;
   margin: 0;
@@ -61,6 +61,7 @@ const InputLabel = styled.label`
   height: 44px;
   padding: 0 12px;
   border-radius: 6px;
+  margin-top: 15px;
 `;
 
 const Input = styled.input`
@@ -73,6 +74,7 @@ const Input = styled.input`
   overflow: hidden;
   text-overflow: ellipsis;
   caret-color: rgb(255, 47, 110);
+  outline: none;
 `;
 
 const SubmitButton = styled.button`
@@ -87,7 +89,11 @@ const SubmitButton = styled.button`
   width: 100%;
   height: 44px;
   border-radius: 6px;
-  margin-top: 16px;
+  margin-top: 20px;
+`;
+
+const FindWrapper = styled.div`
+  margin-top: auto;
 `;
 
 const FindPasswordWrapper = styled.div`
@@ -124,42 +130,6 @@ const FindAccount = styled.button`
   font-size: inherit;
 `;
 
-const Divider = styled.hr`
-  position: relative;
-  color: black;
-  text-align: center;
-  height: 1.5em;
-  border: 0;
-  outline: 0;
-  margin: 24px 0;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid rgb(216, 216, 216);
-  }
-  &:after {
-    content: "OR";
-    display: inline-block;
-    position: relative;
-    top: -2px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(160, 160, 160);
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: -0.3px;
-    line-height: 19px;
-    vertical-align: middle;
-    padding: 5px 14px;
-  }
-`;
-
-const FacebookLoginWrapper = styled.div`
-  width: 100%;
-`;
-
 interface Props {}
 
 const LoginModal: React.FC<Props> = () => {
@@ -167,10 +137,6 @@ const LoginModal: React.FC<Props> = () => {
     useRecoilState(loginModalOpenState);
   const [isSignupModalOpen, setIsSignupModalOpen] =
     useRecoilState(signupModalOpenState);
-
-  // const responseFacebook = (userInfo: ReactFacebookLoginInfo | ReactFacebookFailureResponse) => {
-  //   console.log(userInfo);
-  // }
 
   const handleClose = (): void => {
     setIsLoginModalOpen(false);
@@ -205,6 +171,8 @@ const LoginModal: React.FC<Props> = () => {
               </InputWrapper>
               <SubmitButton>로그인</SubmitButton>
             </Form>
+          </Section>
+          <FindWrapper>
             <FindPasswordWrapper>
               <FindPassword>비밀번호를 잊어버리셨나요?</FindPassword>
             </FindPasswordWrapper>
@@ -212,19 +180,7 @@ const LoginModal: React.FC<Props> = () => {
               계정이 없으신가요 ?{" "}
               <FindAccount onClick={handleSignup}>회원가입</FindAccount>
             </FindAccountWrapper>
-            <Divider />
-            {/* <FacebookLoginWrapper>
-              <FacebookLogin
-                cssClass="my-facebook-button-class"
-                autoLoad
-                appId={''}
-                fields="name,email,picture"
-                callback={responseFacebook}
-                icon="fa-facebook"
-                textButton="Facebook 으로 로그인"
-              />
-            </FacebookLoginWrapper> */}
-          </Section>
+          </FindWrapper>
         </ContentWrapper>
       </Container>
     </Modal>

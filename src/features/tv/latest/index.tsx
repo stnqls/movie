@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import useLatestTv from "./useLatestTv";
 import Card from "../../../components/Card";
@@ -17,7 +17,6 @@ const Title = styled.h4`
 const LatestTvSection: React.FC = () => {
   const { data, isLoading } = useLatestTv();
   const getYear = (date: string) => date.split("-")[0];
-
   return (
     <Base>
       <Title>최근 개봉작</Title>
@@ -30,6 +29,7 @@ const LatestTvSection: React.FC = () => {
           posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.data.poster_path}`}
           voteAverage={data.data.vote_average}
           year={getYear(data.data.first_air_date)}
+          isPoster={data.data.poster_path}
         />
       )}
     </Base>

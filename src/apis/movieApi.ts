@@ -18,3 +18,6 @@ export const similarApi = (movieId: string) =>
 
 export const searchApi = (query: string) =>
   axiosInstance.get(`/search/movie?query=${query}`);
+
+export const reviewApi = (movieId: string) =>
+  axiosInstance.get(`/movie/${movieId}/reviews`);

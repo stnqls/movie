@@ -10,6 +10,7 @@ interface Props {
   year: string;
   posterPath: string;
   voteAverage: number;
+  isPoster: string;
 }
 
 const StyledLink = styled(Link)`
@@ -35,6 +36,23 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
+`;
+
+const NoPoster = styled.div`
+  width: 100%;
+  height: 300px;
+  background-color: #000;
+  display: table;
+`;
+
+const NoPosterName = styled.h2`
+  font-size: 25px;
+  text-align: center;
+  margin: 0;
+  vertical-align: middle;
+  color: #fff;
+  font-weight: lighter;
+  display: table-cell;
 `;
 
 const Info = styled.div`
@@ -70,35 +88,43 @@ const Average = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const Card: React.FC<Props> = ({
   linkUrl,
   title,
   posterPath,
   voteAverage,
   year,
-}) => (
-  <StyledLink to={linkUrl}>
-    <Base>
-      <ImageWrapper>
-        <Image
-          src={`${posterPath}`}
-          alt={`${title} 의 포스터 posterPath=null`}
-        />
-      </ImageWrapper>
-      <Info>
-        <Title>{title}</Title>
-        <Keyword>{year}</Keyword>
-        <Average>
-          <span>평균</span>
-          <span>
-            &nbsp;
-            <AiFillStar />
-          </span>
-          <span>{voteAverage}</span>
-        </Average>
-      </Info>
-    </Base>
-  </StyledLink>
-);
+  isPoster,
+}) => {
+  return (
+    <StyledLink to={linkUrl}>
+      <Base>
+        <ImageWrapper>
+          {isPoster === null ? (
+            <NoPoster>
+              <NoPosterName>등록된 포스터가 없습니다.</NoPosterName>
+            </NoPoster>
+          ) : (
+            <Image
+              src={`${posterPath}`}
+              alt={`${title} 의 포스터 posterPath=null`}
+            />
+          )}
+        </ImageWrapper>
+        <Info>
+          <Title>{title}</Title>
+          <Keyword>{year}</Keyword>
+          <Average>
+            <span>평균</span>
+            <span>
+              &nbsp;
+              <AiFillStar />
+            </span>
+            <span>{voteAverage}</span>
+          </Average>
+        </Info>
+      </Base>
+    </StyledLink>
+  );
+};
 export default Card;

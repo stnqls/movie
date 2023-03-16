@@ -27,6 +27,7 @@ const ContentsWrapper = styled.div`
   grid-template-columns: repeat(5, 1fr);
   margin-top: 15px;
   row-gap: 24px;
+  place-items: center;
 `;
 
 const Link = styled.a`

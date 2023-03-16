@@ -35,6 +35,7 @@ const NowPlayingSection = () => {
               posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}${movie.poster_path}`}
               voteAverage={movie.vote_average}
               year={getYear(movie.release_date)}
+              isPoster={movie.poster_path}
             />
           ))}
         </Slider>

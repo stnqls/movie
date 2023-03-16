@@ -41,6 +41,7 @@ interface Props {
   genres: string;
   runtime: number;
   overview: string;
+  id: string;
 }
 
 const DefaultInfo: React.FC<Props> = ({
@@ -49,6 +50,7 @@ const DefaultInfo: React.FC<Props> = ({
   genres,
   overview,
   runtime,
+  id,
 }) => {
   const hour = Math.ceil(runtime / 60);
   const minute = runtime % 60;
@@ -58,8 +60,8 @@ const DefaultInfo: React.FC<Props> = ({
       <HeaderWrapper>
         <Header>
           <Title>{title}</Title>
-          <Link href="/overview">
-            <MoreSee>더보기</MoreSee>
+          <Link href={`/movie/${id}/reviews`}>
+            <MoreSee>리뷰 보기</MoreSee>
           </Link>
         </Header>
         <Summary>

@@ -48,9 +48,9 @@ const DefaultInfo: React.FC<Props> = ({ title, year, genres, overview }) => {
       <HeaderWrapper>
         <Header>
           <Title>{title}</Title>
-          <Link href="/overview">
+          {/* <Link href="/overview">
             <MoreSee>더보기</MoreSee>
-          </Link>
+          </Link> */}
         </Header>
         <Summary>
           {title}

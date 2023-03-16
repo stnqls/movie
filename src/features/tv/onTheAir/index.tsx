@@ -34,6 +34,7 @@ const OnTheAirTvSection: React.FC = () => {
               posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}/${tv.poster_path}`}
               voteAverage={tv.vote_average}
               year={getYear(tv.first_air_date)}
+              isPoster={tv.poster_path}
             />
           ))}
         </Slide>

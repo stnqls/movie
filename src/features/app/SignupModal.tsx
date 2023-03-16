@@ -35,7 +35,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.h4`
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
   text-align: center;
   margin: 0;
@@ -60,6 +60,7 @@ const InputLabel = styled.label`
   height: 44px;
   padding: 0 12px;
   border-radius: 6px;
+  margin-top: 15px;
 `;
 
 const Input = styled.input`
@@ -72,6 +73,7 @@ const Input = styled.input`
   overflow: hidden;
   text-overflow: ellipsis;
   caret-color: rgb(255, 47, 110);
+  outline: none;
 `;
 
 const SubmitButton = styled.button`
@@ -104,43 +106,7 @@ const LoginWrapper = styled.div`
   font-weight: 400;
   text-align: center;
   color: rgb(140, 140, 140);
-  margin-top: 20px;
-`;
-
-const Divider = styled.hr`
-  position: relative;
-  color: black;
-  text-align: center;
-  height: 1.5em;
-  border: 0;
-  outline: 0;
-  margin: 24px 0;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid rgb(216, 216, 216);
-  }
-  &:after {
-    content: "OR";
-    display: inline-block;
-    position: relative;
-    top: -2px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(160, 160, 160);
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: -0.3px;
-    line-height: 19px;
-    vertical-align: middle;
-    padding: 5px 14px;
-  }
-`;
-
-const FacebookLoginWrapper = styled.div`
-  width: 100%;
+  margin-top: auto;
 `;
 
 interface Props {}
@@ -150,10 +116,6 @@ const SignupModal: React.FC<Props> = () => {
     useRecoilState(loginModalOpenState);
   const [isSignupModalOpen, setIsSignupModalOpen] =
     useRecoilState(signupModalOpenState);
-
-  // const responseFacebook = (userInfo: ReactFacebookLoginInfo | ReactFacebookFailureResponse) => {
-  //   console.log(userInfo);
-  // }
 
   const handleClose = (): void => {
     setIsSignupModalOpen(false);
@@ -193,22 +155,10 @@ const SignupModal: React.FC<Props> = () => {
               </InputWrapper>
               <SubmitButton>회원가입</SubmitButton>
             </Form>
-            <LoginWrapper>
-              이미 가입하셨나요? <Login onClick={handleLogin}>로그인</Login>
-            </LoginWrapper>
-            <Divider />
-            {/* <FacebookLoginWrapper>
-              <FacebookLogin
-                cssClass="my-facebook-button-class"
-                autoLoad
-                appId={''}
-                fields="name,email,picture"
-                callback={responseFacebook}
-                icon="fa-facebook"
-                textButton="Facebook 으로 로그인"
-              />
-            </FacebookLoginWrapper> */}
           </Section>
+          <LoginWrapper>
+            이미 가입하셨나요? <Login onClick={handleLogin}>로그인</Login>
+          </LoginWrapper>
         </ContentWrapper>
       </Container>
     </Modal>

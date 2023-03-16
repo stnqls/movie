@@ -39,6 +39,7 @@ const LatestMoviesSection = () => {
           }`}
           voteAverage={data.data.vote_average}
           year={getYear(data.data.release_date)}
+          isPoster={data.data.poster_path}
         />
       )}
     </Base>

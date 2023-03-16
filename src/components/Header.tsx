@@ -54,7 +54,8 @@ const Menu = styled.li`
 
 const MenuButton = styled.button<{ active?: boolean }>`
   font-size: 15px;
-  color: ${({ active }) => (active ? "rgb(53, 53, 53)" : "rgb(126, 126, 126)")};
+  color: ${({ active }) =>
+    active ? "rgb(255, 47, 110)" : "rgb(126, 126, 126)"};
   cursor: pointer;
   border: none;
   background: none;
@@ -248,10 +249,11 @@ const Header: React.FC<Props> = () => {
               </SearchContainer>
               <SearchResultWrapper>
                 <SearchResultList>
-                  {searchResult?.data.results.map((searchResultItem) => (
+                  {searchResult?.results.map((searchResultItem) => (
                     <Link
                       href={`/movie/${searchResultItem.id}`}
                       key={searchResultItem.id}
+                      onClick={() => console.log(searchResultItem.id)}
                     >
                       <SearchResultListItem>
                         {searchResultItem.title}

@@ -314,6 +314,7 @@ const MovieDetail: React.FC = () => {
                   genres={genres}
                   runtime={data.runtime}
                   overview={data.overview}
+                  id={id!}
                 />
                 <Similar id={id!} />
               </ContentSectionContainer>

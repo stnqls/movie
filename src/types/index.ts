@@ -58,6 +58,23 @@ export interface MovieDetail extends Movie {
   tagline: string;
 }
 
+interface AuthorDetails {
+  name: string;
+  username: string;
+  avatar_path: string;
+  rating: number;
+}
+
+export interface Review {
+  author: string;
+  author_details: AuthorDetails;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  id: string;
+  url: string;
+}
+
 interface TV {
   id: number;
   name: string;
