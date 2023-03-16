@@ -40,17 +40,24 @@ interface Props {
   year: string;
   genres: string;
   overview: string;
+  id: string;
 }
 
-const DefaultInfo: React.FC<Props> = ({ title, year, genres, overview }) => {
+const DefaultInfo: React.FC<Props> = ({
+  title,
+  year,
+  genres,
+  overview,
+  id,
+}) => {
   return (
     <Base>
       <HeaderWrapper>
         <Header>
           <Title>{title}</Title>
-          {/* <Link href="/overview">
-            <MoreSee>더보기</MoreSee>
-          </Link> */}
+          <Link href={`/tv/${id}/reviews`}>
+            <MoreSee>리뷰 보기</MoreSee>
+          </Link>
         </Header>
         <Summary>
           {title}

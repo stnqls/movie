@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Header from "../components/Header";
-import useMovieReview from "../features/movie/useMovieReview";
 import styled from "@emotion/styled";
-import DetailInfo from "../features/movie/detail/DetailInfo";
+import DetailInfo from "../features/tv/detail/DetailInfo";
+import useTvReview from "../features/tv/useTvReview";
 
 const Base = styled.div`
   position: relative;
@@ -76,10 +76,10 @@ type Params = {
   id: string;
 };
 
-const MovieReview: React.FC = () => {
+const TvReview: React.FC = () => {
   const { id } = useParams<Params>();
-  const { isLoading, data } = useMovieReview(id!);
-
+  const { isLoading, data } = useTvReview(id!);
+  console.log(data);
   interface Props {
     authorName: string;
     authorImg: string;
@@ -111,6 +111,7 @@ const MovieReview: React.FC = () => {
       </CardContainer>
     );
   };
+
   return (
     <>
       <Header />
@@ -140,4 +141,4 @@ const MovieReview: React.FC = () => {
     </>
   );
 };
-export default MovieReview;
+export default TvReview;

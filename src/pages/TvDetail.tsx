@@ -313,6 +313,7 @@ const TvDetail: React.FC = () => {
                   year={year}
                   genres={genres}
                   overview={data.overview}
+                  id={id!}
                 />
                 <Similar id={id!} />
               </ContentSectionContainer>

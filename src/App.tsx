@@ -5,6 +5,7 @@ import MainPage from "./pages/MainPage";
 import TvPage from "./pages/TvPage";
 import TvDetail from "./pages/TvDetail";
 import MovieDetail from "./pages/MovieDetail";
+import TvReview from "./pages/TvReview";
 import MovieReview from "./pages/MovieReview";
 
 function App() {
@@ -12,10 +13,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/tv/:id/reviews" element={<TvReview />} />
         <Route path="/tv/:id" element={<TvDetail />} />
         <Route path="/tv" element={<TvPage />} />
-        <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/movie/:id/reviews" element={<MovieReview />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
       </Routes>
     </Router>
   );

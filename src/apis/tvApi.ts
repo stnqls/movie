@@ -17,3 +17,6 @@ export const similarApi = (tvId: string) =>
 
 export const searchTvApi = (query: string) =>
   axiosInstance.get(`/search/tv?query=${query}`);
+
+export const reviewApi = (tvId: string) =>
+  axiosInstance.get(`/tv/${tvId}/reviews`);
