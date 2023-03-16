@@ -61,7 +61,7 @@ const MenuButton = styled.button<{ active?: boolean }>`
   background: none;
 `;
 
-const SearchMenu = styled.li`
+const SearchMenu = styled.div`
   width: 300px;
   display: flex;
   align-items: center;
@@ -233,9 +233,9 @@ const Header: React.FC<Props> = () => {
                 <MenuButton active={pathname === "/tv"}>TV 프로그램</MenuButton>
               </Link>
             </Menu>
-            <SearchMenu>
+            <SearchMenu ref={searchRef}>
               <SearchContainer>
-                <SearchFormWrapper ref={searchRef}>
+                <SearchFormWrapper>
                   <SearchForm>
                     <SearchLabel>
                       <AiOutlineSearch />
