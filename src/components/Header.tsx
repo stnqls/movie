@@ -218,8 +218,8 @@ const Header: React.FC<Props> = () => {
             <Menu>
               <Link href="/">
                 <TextLogo>
-                  <span className="primary">WATCHOUT</span>
-                  <span>PEDIA</span>
+                  <span className="primary">MOVIE</span>
+                  <span>TV</span>
                 </TextLogo>
               </Link>
             </Menu>
