@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import useUpcomingMovie from "./useUpcomingMovie";
 import Card from "../../../components/Card";

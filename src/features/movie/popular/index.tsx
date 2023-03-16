@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import usePopularMovie from "./usePopularMovie";
 import Card from "../../../components/Card";
