@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import useMovieReview from "../features/movie/useMovieReview";
 import styled from "@emotion/styled";
 import DetailInfo from "../features/movie/detail/DetailInfo";
+import { AiOutlinePicture } from "react-icons/ai";
 
 const Base = styled.div`
   position: relative;
@@ -16,6 +17,10 @@ const Title = styled.h2`
   font-size: 23px;
   font-weight: 700;
   margin: 15px 0 20px;
+  > span {
+    font-size: 18px;
+    font-weight: 500;
+  }
 `;
 
 const ContentsWrapper = styled.div`
@@ -53,11 +58,14 @@ const AuthorImg = styled.img`
 
 const AuthorName = styled.p`
   text-align: center;
+  font-weight: 600;
 `;
 
 const Detail = styled.div`
   width: 100%;
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Contents = styled.div`
@@ -65,52 +73,64 @@ const Contents = styled.div`
   margin-bottom: 10px;
 `;
 
-const CreatedAt = styled.p`
+const CreatedAt = styled.div`
   text-align: right;
   font-size: 15px;
   color: rgb(77, 77, 77);
-  margin: 0;
+  margin-top: auto;
+`;
+
+const NoReview = styled.div`
+  font-size: 25px;
+  text-align: center;
+  padding: 100px;
 `;
 
 type Params = {
   id: string;
 };
 
+interface Props {
+  authorName: string;
+  authorImg: string;
+  contents: string;
+  createdAt: string;
+}
+
+const Review: React.FC<Props> = ({
+  authorName,
+  authorImg,
+  contents,
+  createdAt,
+}) => {
+  let avatar = authorImg;
+  if (avatar === null) {
+    avatar = "/images/avatar.png";
+  } else if (avatar.length < 35) {
+    avatar = `${process.env.REACT_APP_IMAGE_PREFIX}/${authorImg}`;
+  } else {
+    avatar = avatar.substr(1);
+  }
+
+  return (
+    <CardContainer>
+      <User>
+        <AuthorImgWrapper>
+          <AuthorImg src={avatar} alt="Avatar" />
+        </AuthorImgWrapper>
+        <AuthorName>{authorName}</AuthorName>
+      </User>
+      <Detail>
+        <Contents>{contents}</Contents>
+        <CreatedAt>{createdAt.slice(0, 10)}</CreatedAt>
+      </Detail>
+    </CardContainer>
+  );
+};
+
 const MovieReview: React.FC = () => {
   const { id } = useParams<Params>();
   const { isLoading, data } = useMovieReview(id!);
-
-  interface Props {
-    authorName: string;
-    authorImg: string;
-    contents: string;
-    createdAt: string;
-  }
-
-  const Review: React.FC<Props> = ({
-    authorName,
-    authorImg,
-    contents,
-    createdAt,
-  }) => {
-    return (
-      <CardContainer>
-        <User>
-          <AuthorImgWrapper>
-            <AuthorImg
-              src={`${process.env.REACT_APP_IMAGE_PREFIX}/${authorImg}`}
-              alt="No Avatar"
-            />
-          </AuthorImgWrapper>
-          <AuthorName>{authorName}</AuthorName>
-        </User>
-        <Detail>
-          <Contents>{contents}</Contents>
-          <CreatedAt>{createdAt.slice(0, 10)}</CreatedAt>
-        </Detail>
-      </CardContainer>
-    );
-  };
   return (
     <>
       <Header />
@@ -119,9 +139,11 @@ const MovieReview: React.FC = () => {
         <div>Loading</div>
       ) : (
         <Base>
-          <Title>리뷰</Title>
+          <Title>
+            리뷰 <span>(총 {data.data.total_results}개의 리뷰)</span>
+          </Title>
           {data.data.total_results === 0 ? (
-            <div>리뷰가 없습니다.</div>
+            <NoReview>리뷰가 없습니다.</NoReview>
           ) : (
             <ContentsWrapper>
               {data.data.results.reverse().map((result) => (

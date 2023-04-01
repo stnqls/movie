@@ -2,8 +2,10 @@ import React from "react";
 import styled from "@emotion/styled";
 import useSimilarMovie from "../useSimilarMovie";
 
+import { AiOutlinePicture } from "react-icons/ai";
+
 const Base = styled.section`
-  padding: 11px 15px;
+  padding: 11px 15px 20px;
   border-bottom: 1px solid #ededed;
 `;
 
@@ -35,12 +37,12 @@ const Link = styled.a`
 `;
 
 const CardContainer = styled.div`
-  max-width: 140px;
+  max-width: 160px;
 `;
 
 const PosterWrapper = styled.div`
-  width: 140px;
-  height: 204px;
+  width: 160px;
+  height: 220px;
   border: 1px solid rgb(234, 233, 232);
 `;
 
@@ -52,8 +54,20 @@ const Poster = styled.img`
   object-fit: cover;
 `;
 
+const NoPoster = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #e1e2e2;
+  color: #333;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Info = styled.div`
-  margin: 5px 10px 0px 0px;
+  margin-top: 10px;
 `;
 
 const CardTitle = styled.div`
@@ -66,39 +80,34 @@ const CardTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-const VoteAverage = styled.div`
-  margin-top: 2px;
-  color: rgb(120, 120, 120);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
 interface SimilarMovieProps {
   id: number;
   posterPath: string;
   title: string;
-  voteAverage: number;
 }
 
 const SimilarMovie: React.FC<SimilarMovieProps> = ({
   id,
   posterPath,
   title,
-  voteAverage,
 }) => {
   return (
     <Link href={`/movie/${id}`} target="_blank">
       <CardContainer>
         <PosterWrapper>
-          <Poster src={`${process.env.REACT_APP_IMAGE_PREFIX}/${posterPath}`} />
+          {posterPath !== null ? (
+            <Poster
+              src={`${process.env.REACT_APP_IMAGE_PREFIX}/${posterPath}`}
+            />
+          ) : (
+            <NoPoster>
+              <AiOutlinePicture />
+              No Image
+            </NoPoster>
+          )}
         </PosterWrapper>
         <Info>
           <CardTitle>{title}</CardTitle>
-          <VoteAverage>{voteAverage}</VoteAverage>
         </Info>
       </CardContainer>
     </Link>
@@ -129,7 +138,6 @@ const Similar: React.FC<Props> = ({ id }) => {
               id={result.id}
               posterPath={result.poster_path}
               title={result.title}
-              voteAverage={result.vote_average}
             />
           ))
         )}

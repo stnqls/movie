@@ -23,3 +23,6 @@ export const reviewApi = (movieId: string) =>
   axiosInstance.get(`/movie/${movieId}/reviews`);
 
 export const trendingApi = () => axiosInstance.get("/trending/movie/week");
+
+export const translationApi = (movieId: string) =>
+  axiosInstance.get(`/movie/${movieId}/translations`);

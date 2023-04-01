@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import useSimilarTv from "../useSimilarTv";
 
 const Base = styled.section`
-  padding: 11px 15px;
+  padding: 11px 15px 20px;
   border-bottom: 1px solid #ededed;
 `;
 
@@ -35,12 +35,12 @@ const Link = styled.a`
 `;
 
 const CardContainer = styled.div`
-  max-width: 140px;
+  max-width: 160px;
 `;
 
 const PosterWrapper = styled.div`
-  width: 140px;
-  height: 204px;
+  width: 160px;
+  height: 220px;
   border: 1px solid rgb(234, 233, 232);
 `;
 
@@ -81,14 +81,12 @@ interface SimilarMovieProps {
   id: number;
   posterPath: string;
   title: string;
-  voteAverage: number;
 }
 
 const SimilarMovie: React.FC<SimilarMovieProps> = ({
   id,
   posterPath,
   title,
-  voteAverage,
 }) => {
   return (
     <Link href={`/movie/${id}`} target="_blank">
@@ -98,7 +96,6 @@ const SimilarMovie: React.FC<SimilarMovieProps> = ({
         </PosterWrapper>
         <Info>
           <CardTitle>{title}</CardTitle>
-          <VoteAverage>{voteAverage}</VoteAverage>
         </Info>
       </CardContainer>
     </Link>
@@ -129,7 +126,6 @@ const Similar: React.FC<Props> = ({ id }) => {
               id={result.id}
               posterPath={result.poster_path}
               title={result.name}
-              voteAverage={result.vote_average}
             />
           ))
         )}

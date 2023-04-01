@@ -5,58 +5,17 @@ const Base = styled.footer`
   box-sizing: border-box;
   width: 100%;
   height: 100px;
-`;
-
-const Section = styled.section`
   background-color: #1c1d1f;
-`;
-
-// const Statistics = styled.section`
-//   background: #101113;
-//   width: 100%;
-//   height: 62px;
-//   line-height: 62px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
-// const Summary = styled.span`
-//   color: #d1d1d2;
-//   font-size: 19px;
-//   font-weight: 500;
-//   line-height: 22px;
-//   text-align: center;
-// `;
-
-// const Emphasis = styled.em`
-//   color: #ff0558;
-//   font-size: 19px;
-//   font-weight: 500;
-//   line-height: 22px;
-// `;
-
-const Container = styled.section`
   background: #1c1d1f;
-  padding: 20px 0 38px;
-  margin: 0 auto;
-  max-width: 1200px;
 `;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  margin: 0 30px;
-  //margin : 0 60px
-`;
-
-const Left = styled.div``;
-
-const Right = styled.div``;
 
 const TermAndPolicy = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  margin: 0 auto;
+  padding: 20px 0 38px;
+  max-width: 1200px;
 `;
 
 const TermAndPolicyItem = styled.li`
@@ -83,27 +42,11 @@ const TermAndPolicyItem = styled.li`
 const Footer = () => {
   return (
     <Base>
-      <Section>
-        {/* <Statistics>
-          <Summary>
-            지금까지&nbsp;
-            <Emphasis>* 644,934,343 개의 평가가</Emphasis>
-            &nbsp;쌓였습니다.
-          </Summary>
-        </Statistics> */}
-        <Container>
-          <ContentWrapper>
-            <Left>
-              <TermAndPolicy>
-                <TermAndPolicyItem>서비스 이용약관</TermAndPolicyItem>
-                <TermAndPolicyItem>개인정보 처리방침</TermAndPolicyItem>
-                <TermAndPolicyItem>회사 정보</TermAndPolicyItem>
-              </TermAndPolicy>
-            </Left>
-            <Right />
-          </ContentWrapper>
-        </Container>
-      </Section>
+      <TermAndPolicy>
+        <TermAndPolicyItem>서비스 이용약관</TermAndPolicyItem>
+        <TermAndPolicyItem>개인정보 처리방침</TermAndPolicyItem>
+        <TermAndPolicyItem>회사 정보</TermAndPolicyItem>
+      </TermAndPolicy>
     </Base>
   );
 };

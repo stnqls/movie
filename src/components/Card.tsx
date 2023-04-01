@@ -61,7 +61,7 @@ const Info = styled.div`
 `;
 
 const Title = styled.h4`
-  color: #292a32;
+  color: #141416;
   font-size: 16px;
   font-weight: 500;
   overflow: hidden;
@@ -81,7 +81,7 @@ const Keyword = styled.div`
 `;
 
 const Average = styled.div`
-  color: #74747b;
+  color: #292a32;
   font-size: 13px;
   font-weight: 400;
   margin-top: 5px;
@@ -105,22 +105,22 @@ const Card: React.FC<Props> = ({
               <NoPosterName>등록된 포스터가 없습니다.</NoPosterName>
             </NoPoster>
           ) : (
-            <Image
-              src={`${posterPath}`}
-              alt={`${title} 의 포스터 posterPath=null`}
-            />
+            <Image src={`${posterPath}`} alt={`${title}`} />
           )}
         </ImageWrapper>
         <Info>
           <Title>{title}</Title>
-          <Keyword>{year}</Keyword>
+          <Keyword>개봉 {year}</Keyword>
           <Average>
-            <span>평균</span>
-            <span>
-              &nbsp;
-              <AiFillStar />
-            </span>
-            <span>{voteAverage}</span>
+            <span>평점</span>
+            <AiFillStar
+              style={{
+                color: "rgb(255, 60, 11)",
+                display: "block",
+                margin: "2px 3px 0",
+              }}
+            />
+            <span>{voteAverage.toFixed(2)}</span>
           </Average>
         </Info>
       </Base>

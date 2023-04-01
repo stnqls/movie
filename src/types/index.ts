@@ -174,3 +174,19 @@ export interface ListResponse<T> {
   total_pages: number;
   total_results: number;
 }
+
+interface Data {
+  title: string;
+  overview: string;
+}
+
+export interface ListTranslations<T> {
+  id: number;
+  translations: T[];
+}
+
+export interface TranslationDetail {
+  name: string;
+  english_name: string;
+  data: Data;
+}

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "@emotion/styled";
+import useDefaultInfo from "./useDefaultInfo";
 
 const Base = styled.div`
   padding: 11px 15px;
@@ -14,11 +15,6 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const Link = styled.a`
-  text-decoration: none;
-  color: #ff2f6e;
-`;
-
 const Title = styled.h2`
   color: #000;
   font-size: 19px;
@@ -27,13 +23,14 @@ const Title = styled.h2`
 `;
 
 const Summary = styled.div`
-  color: #4a4a4a;
+  color: #333;
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
+  > span {
+    color: #808080;
+  }
 `;
-
-const MoreSee = styled.div``;
 
 interface Props {
   title: string;
@@ -42,6 +39,7 @@ interface Props {
   runtime: number;
   overview: string;
   id: string;
+  contries: string;
 }
 
 const DefaultInfo: React.FC<Props> = ({
@@ -50,29 +48,43 @@ const DefaultInfo: React.FC<Props> = ({
   genres,
   overview,
   runtime,
+  contries,
   id,
 }) => {
+  const { data, isLoading } = useDefaultInfo(id);
   const hour = Math.ceil(runtime / 60);
   const minute = runtime % 60;
+  // const translate = useMemo(() => {
+  //   return data?.data.translations.find((el) => el.english_name === "Korean");
+  // }, [data?.data.translations]);
+  const translate = data?.data.translations.find(
+    (el) => el.english_name === "Korean"
+  )?.data;
 
   return (
     <Base>
       <HeaderWrapper>
         <Header>
-          <Title>{title}</Title>
-          <Link href={`/movie/${id}/reviews`}>
-            <MoreSee>리뷰 보기</MoreSee>
-          </Link>
+          <Title>기본정보</Title>
         </Header>
         <Summary>
-          {title}
+          <span>Title : </span>
+          {title === "" ? "준비중입니다" : translate?.title}
           <br />
-          {year} ・ {genres}
+          <span>Genres : </span>
+          {genres === "" ? "준비중입니다" : genres}
           <br />
-          {hour}시간 {minute}분
+          <span>Country : </span>
+          {contries === "" ? "준비중입니다" : contries}
+          <br />
+          <span>Release date : </span>
+          {year === "" ? "준비중입니다" : year}
+          <br />
+          <span>Running time : </span>
+          {`${runtime}` === "" ? "준비중입니다" : `${hour}시간 ${minute}분`}
           <br />
           <br />
-          {overview}
+          {isLoading || !data ? <div>Loading...</div> : translate?.overview}
         </Summary>
       </HeaderWrapper>
     </Base>
