@@ -1,3 +1,0 @@
-//Authentication
-
-// Create Request Token

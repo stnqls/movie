@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { AiOutlineClose } from "react-icons/ai";
 import Modal from "../../components/Modal";
-import { loginModalOpenState, signupModalOpenState } from "./atom";
+import { loginModalOpenState } from "./atom";
 
 const Container = styled.div`
   width: 375px;
@@ -152,17 +152,29 @@ interface Props {}
 const LoginModal: React.FC<Props> = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] =
     useRecoilState(loginModalOpenState);
-  const [isSignupModalOpen, setIsSignupModalOpen] =
-    useRecoilState(signupModalOpenState);
-
+  // const [id, setId] = useState<string | undefined>("");
+  // const [password, setPassword] = useState<string | undefined>("");
   const handleClose = (): void => {
     setIsLoginModalOpen(false);
   };
 
-  const handleSignup = (): void => {
-    handleClose();
-    !isSignupModalOpen && setIsSignupModalOpen(true);
-  };
+  // function login() {
+  //   axios({
+  //     method: "POST",
+  //     url: `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_API_KEY}`,
+  //     data: {
+  //       username: id,
+  //       password: password,
+  //       request_token: window.sessionStorage.getItem("token"),
+  //     },
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   return (
     <Modal isOpen={isLoginModalOpen} onClose={handleClose}>
@@ -180,12 +192,23 @@ const LoginModal: React.FC<Props> = () => {
             <Form>
               <InputWrapper>
                 <InputLabel>
-                  <Input placeholder="이메일" />
+                  <Input
+                    placeholder="이메일"
+                    // onChange={(e) => {
+                    //   setId(e.target.value);
+                    // }}
+                  />
                 </InputLabel>
               </InputWrapper>
               <InputWrapper>
                 <InputLabel>
-                  <Input placeholder="비밀번호" />
+                  <Input
+                    placeholder="비밀번호"
+                    // onChange={(e) => {
+                    //   setPassword(e.target.value);
+                    // }}
+                    type="password"
+                  />
                 </InputLabel>
               </InputWrapper>
               <SubmitButton>로그인</SubmitButton>

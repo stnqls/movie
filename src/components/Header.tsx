@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled/macro";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useRecoilState } from "recoil";
@@ -209,6 +209,15 @@ const Header: React.FC<Props> = () => {
   useClickOutside(searchRef, () => setSearchKeyword(""));
 
   const { data: searchResult } = useMovieSearch(searchKeyword);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("token")) {
+      console.log("login");
+      console.log(window.sessionStorage.getItem("token"));
+    } else {
+      console.log("false");
+    }
+  }, []);
 
   return (
     <Base>
