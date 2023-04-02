@@ -176,44 +176,40 @@ const LoginModal: React.FC<Props> = () => {
   //       console.log(err);
   //     });
   // }
-  let token = "";
-  function getToken() {
-    axios({
-      method: "GET",
-      url: `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`,
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          // window.sessionStorage.setItem("token", res.data.request_token);
-          token = res.data.request_token;
-        }
-        console.log(res);
-        createSession();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // let token: string = "";
+  // function getToken() {
+  //   axios({
+  //     method: "GET",
+  //     url: `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`,
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         // window.sessionStorage.setItem("token", res.data.request_token);
+  //         token = res.data.request_token;
+  //       }
+  //       console.log(res);
+  //       createSession();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
-  function createSession() {
-    axios({
-      method: "POST",
-      url: `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`,
-      data: {
-        request_token: token,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  useEffect(() => {
-    getToken();
-  }, []);
+  // function createSession() {
+  //   axios({
+  //     method: "POST",
+  //     url: `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`,
+  //     data: {
+  //       request_token: token,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   return (
     <Modal isOpen={isLoginModalOpen} onClose={handleClose}>
