@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { AiOutlineClose } from "react-icons/ai";
 import Modal from "../../components/Modal";
 import { loginModalOpenState } from "./atom";
-import axios from "axios";
 
 const Container = styled.div`
   width: 375px;
