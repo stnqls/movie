@@ -7,7 +7,7 @@ import useTvReview from "../features/tv/useTvReview";
 
 const Base = styled.div`
   position: relative;
-  max-width: 1220px;
+  max-width: 1000px;
   margin: 0 auto;
 `;
 
@@ -16,6 +16,10 @@ const Title = styled.h2`
   font-size: 23px;
   font-weight: 700;
   margin: 15px 0 20px;
+  > span {
+    font-size: 18px;
+    font-weight: 500;
+  }
 `;
 
 const ContentsWrapper = styled.div`
@@ -33,7 +37,7 @@ const CardContainer = styled.div`
 
 const User = styled.div`
   align-self: center;
-  width: auto;
+  width: 150px;
 `;
 
 const AuthorImgWrapper = styled.div`
@@ -53,23 +57,33 @@ const AuthorImg = styled.img`
 
 const AuthorName = styled.p`
   text-align: center;
+  word-break: break-all;
 `;
 
 const Detail = styled.div`
-  width: 100%;
+  width: 810px;
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Contents = styled.div`
   font-size: 18px;
   margin-bottom: 10px;
+  word-break: keep-all;
 `;
 
 const CreatedAt = styled.p`
   text-align: right;
   font-size: 15px;
   color: rgb(77, 77, 77);
-  margin: 0;
+  margin-top: auto;
+`;
+
+const NoReview = styled.div`
+  font-size: 25px;
+  text-align: center;
+  padding: 100px;
 `;
 
 type Params = {
@@ -92,14 +106,20 @@ const TvReview: React.FC = () => {
     contents,
     createdAt,
   }) => {
+    let avatar = authorImg;
+    if (avatar === null) {
+      avatar = "/images/avatar.png";
+    } else if (avatar.length < 35) {
+      avatar = `${process.env.REACT_APP_IMAGE_PREFIX}/${authorImg}`;
+    } else {
+      avatar = avatar.substr(1);
+    }
+
     return (
       <CardContainer>
         <User>
           <AuthorImgWrapper>
-            <AuthorImg
-              src={`${process.env.REACT_APP_IMAGE_PREFIX}/${authorImg}`}
-              alt="No Avatar"
-            />
+            <AuthorImg src={avatar} alt="Avatar" />
           </AuthorImgWrapper>
           <AuthorName>{authorName}</AuthorName>
         </User>
@@ -119,9 +139,11 @@ const TvReview: React.FC = () => {
         <div>Loading</div>
       ) : (
         <Base>
-          <Title>리뷰</Title>
+          <Title>
+            리뷰 <span>(총 {data.data.total_results}개의 리뷰)</span>
+          </Title>
           {data.data.total_results === 0 ? (
-            <div>리뷰가 없습니다.</div>
+            <NoReview>리뷰가 없습니다.</NoReview>
           ) : (
             <ContentsWrapper>
               {data.data.results.reverse().map((result) => (

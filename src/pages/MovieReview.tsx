@@ -4,11 +4,10 @@ import Header from "../components/Header";
 import useMovieReview from "../features/movie/useMovieReview";
 import styled from "@emotion/styled";
 import DetailInfo from "../features/movie/detail/DetailInfo";
-import { AiOutlinePicture } from "react-icons/ai";
 
 const Base = styled.div`
   position: relative;
-  max-width: 1220px;
+  max-width: 1000px;
   margin: 0 auto;
 `;
 
@@ -38,7 +37,7 @@ const CardContainer = styled.div`
 
 const User = styled.div`
   align-self: center;
-  width: auto;
+  width: 150px;
 `;
 
 const AuthorImgWrapper = styled.div`
@@ -62,7 +61,7 @@ const AuthorName = styled.p`
 `;
 
 const Detail = styled.div`
-  width: 100%;
+  width: 810px;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
@@ -71,6 +70,7 @@ const Detail = styled.div`
 const Contents = styled.div`
   font-size: 18px;
   margin-bottom: 10px;
+  word-break: keep-all;
 `;
 
 const CreatedAt = styled.div`

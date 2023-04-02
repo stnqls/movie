@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
-// import FacebookLogin, { ReactFacebookFailureResponse, ReactFacebookLoginInfo } from 'react-facebook-login';
 import { useRecoilState } from "recoil";
-
+import { AiOutlineClose } from "react-icons/ai";
 import Modal from "../../components/Modal";
 import { loginModalOpenState, signupModalOpenState } from "./atom";
 
@@ -14,32 +13,41 @@ const Container = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: center;
+  position: relative;
+`;
+
+const Close = styled.div`
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  cursor: pointer;
 `;
 
 const ContentWrapper = styled.div`
-  padding: 32px 20px 48px;
+  padding: 32px 32px 48px;
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-const LogoWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
-const Logo = styled.img``;
-
-const TitleWrapper = styled.div`
-  margin: 24px 0 20px;
+const TextLogo = styled.h1`
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  text-align: left;
+  > span[class="primary"] {
+    color: rgb(255, 47, 110);
+  }
+  > span:not(.primary) {
+    color: #222;
+  }
 `;
 
 const Title = styled.h4`
   font-size: 20px;
   font-weight: 700;
-  text-align: center;
-  margin: 0;
+  text-align: left;
+  margin: 24px 0 20px;
   padding: 0;
 `;
 
@@ -77,6 +85,13 @@ const Input = styled.input`
   outline: none;
 `;
 
+const Explain = styled.div`
+  margin: 5px 0;
+  text-align: center;
+  font-size: 13px;
+  color: #9e9e9e;
+`;
+
 const SubmitButton = styled.button`
   padding: 0;
   border: none;
@@ -89,7 +104,7 @@ const SubmitButton = styled.button`
   width: 100%;
   height: 44px;
   border-radius: 6px;
-  margin-top: 20px;
+  margin-top: 40px;
 `;
 
 const FindWrapper = styled.div`
@@ -103,7 +118,7 @@ const FindPasswordWrapper = styled.div`
   margin: 20px 0 14px;
 `;
 
-const FindPassword = styled.button`
+const FindPassword = styled.a`
   background: none;
   padding: 0;
   border: none;
@@ -111,6 +126,7 @@ const FindPassword = styled.button`
   cursor: pointer;
   color: rgb(255, 47, 110);
   font-size: inherit;
+  text-decoration: none;
 `;
 
 const FindAccountWrapper = styled.div`
@@ -120,7 +136,7 @@ const FindAccountWrapper = styled.div`
   color: rgb(140, 140, 140);
 `;
 
-const FindAccount = styled.button`
+const FindAccount = styled.a`
   background: none;
   padding: 0;
   border: none;
@@ -128,6 +144,7 @@ const FindAccount = styled.button`
   cursor: pointer;
   color: rgb(255, 47, 110);
   font-size: inherit;
+  text-decoration: none;
 `;
 
 interface Props {}
@@ -150,13 +167,15 @@ const LoginModal: React.FC<Props> = () => {
   return (
     <Modal isOpen={isLoginModalOpen} onClose={handleClose}>
       <Container>
+        <Close onClick={handleClose}>
+          <AiOutlineClose style={{ width: "25px", height: "25px" }} />
+        </Close>
         <ContentWrapper>
-          <LogoWrapper>
-            <Logo src="/logo.png" />
-          </LogoWrapper>
-          <TitleWrapper>
-            <Title>로그인</Title>
-          </TitleWrapper>
+          <TextLogo>
+            <span className="primary">MOVIE</span>
+            <span>TV</span>
+          </TextLogo>
+          <Title>로그인</Title>
           <Section>
             <Form>
               <InputWrapper>
@@ -171,14 +190,22 @@ const LoginModal: React.FC<Props> = () => {
               </InputWrapper>
               <SubmitButton>로그인</SubmitButton>
             </Form>
+            <Explain>
+              로그인시 사용되는 아이디와 비밀번호는, <br />
+              TMDB사이트의 아이디,비밀번호와동일합니다.
+            </Explain>
           </Section>
           <FindWrapper>
             <FindPasswordWrapper>
-              <FindPassword>비밀번호를 잊어버리셨나요?</FindPassword>
+              <FindPassword href="https://www.themoviedb.org/reset-password">
+                비밀번호를 잊어버리셨나요?
+              </FindPassword>
             </FindPasswordWrapper>
             <FindAccountWrapper>
-              계정이 없으신가요 ?{" "}
-              <FindAccount onClick={handleSignup}>회원가입</FindAccount>
+              계정이 없으신가요?
+              <FindAccount href="https://www.themoviedb.org/signup">
+                회원가입
+              </FindAccount>
             </FindAccountWrapper>
           </FindWrapper>
         </ContentWrapper>

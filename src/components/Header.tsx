@@ -262,14 +262,14 @@ const Header: React.FC<Props> = () => {
                 </SearchResultList>
               </SearchResultWrapper>
             </SearchMenu>
-            {/* <Menu>
+            <Menu>
               <SignIn onClick={handleLoginModal}>로그인</SignIn>
               {isLoginModalOpen && <Portal children={<LoginModal />} />}
             </Menu>
             <Menu>
               <SignUp onClick={handleSignup}>회원가입</SignUp>
               {isSignupModalOpen && <Portal children={<SignupModal />} />}
-            </Menu> */}
+            </Menu>
           </MenuList>
         </MenuListWrapper>
       </Navigation>

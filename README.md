@@ -4,4 +4,6 @@
 
 https://www.themoviedb.org/ 에서 제공하는 api를 사용해 영화와 TV프로그램 각각의 최신작, 인기상영작, 리뷰를 보는 사이트입니다.
 
+React와 TypeScript를 사용하여 만들었으며, 조금씩 기능을 추가하고 있습니다.
+
 https://themovietv.netlify.app/

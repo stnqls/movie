@@ -4,7 +4,12 @@ import Footer from "../components/Footer";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import useMovieDetail from "../features/movie/useMovieDetail";
-import { AiOutlinePlus, AiFillStar, AiOutlineEye } from "react-icons/ai";
+import {
+  AiOutlinePlus,
+  AiFillStar,
+  AiOutlineEye,
+  AiOutlinePicture,
+} from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
 import { Rating } from "@mui/material";
 import DefaultInfo from "../features/movie/detail/DefaultInfo";
@@ -178,7 +183,17 @@ const ContentSectionContainer = styled.div`
   background: #fff;
   border-color: #e3e3e3;
 `;
-
+const NoPoster = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #e1e2e2;
+  color: #333;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 type Params = {
   id?: string;
 };
@@ -190,6 +205,7 @@ const MovieDetail: React.FC = () => {
   const genres = useMemo(() => {
     return data?.genres?.map((genre) => genre.name).join(" / ") || "";
   }, [data]);
+
   return (
     <>
       <Header />
@@ -211,9 +227,16 @@ const MovieDetail: React.FC = () => {
                 <Main>
                   <Container>
                     <PosterWrapper>
-                      <Poster
-                        src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
-                      />
+                      {data.poster_path !== null ? (
+                        <Poster
+                          src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
+                        />
+                      ) : (
+                        <NoPoster>
+                          <AiOutlinePicture />
+                          No Image
+                        </NoPoster>
+                      )}
                     </PosterWrapper>
                     <ContentWrapper>
                       <Title>{data.title}</Title>

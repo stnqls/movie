@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import useDefaultInfo from "./useDefaultInfo";
 
 const Base = styled.div`
   padding: 11px 15px;
@@ -12,11 +13,6 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Link = styled.a`
-  text-decoration: none;
-  color: #ff2f6e;
 `;
 
 const Title = styled.h2`
@@ -33,14 +29,17 @@ const Summary = styled.div`
   line-height: 24px;
 `;
 
-const MoreSee = styled.div``;
-
 interface Props {
   title: string;
   year: string;
   genres: string;
   overview: string;
   id: string;
+  contries: string;
+  nextEpisodeDate: string;
+  nextEpisodeName: string;
+  lastEpisodeDate: string;
+  status: string;
 }
 
 const DefaultInfo: React.FC<Props> = ({
@@ -49,23 +48,51 @@ const DefaultInfo: React.FC<Props> = ({
   genres,
   overview,
   id,
+  contries,
+  nextEpisodeDate,
+  nextEpisodeName,
+  lastEpisodeDate,
+  status,
 }) => {
+  const { data, isLoading } = useDefaultInfo(id);
+  const translate = data?.data.translations.find(
+    (el) => el.english_name === "Korean"
+  )?.data;
+
   return (
     <Base>
       <HeaderWrapper>
         <Header>
-          <Title>{title}</Title>
-          <Link href={`/tv/${id}/reviews`}>
-            <MoreSee>리뷰 보기</MoreSee>
-          </Link>
+          <Title>기본정보</Title>
         </Header>
         <Summary>
-          {title}
+          <span>Title : </span>
+          {title === "" ? "준비중입니다" : translate?.title || title}
           <br />
-          {year} ・ {genres}
+          <span>Genres : </span>
+          {genres === "" ? "준비중입니다" : genres}
+          <br />
+          <span>Country : </span>
+          {contries === "" ? "준비중입니다" : contries}
+          <br />
+          <span>First Air Date : </span>
+          {year === "" ? "준비중입니다" : year}
+          <br />
+          {status === "Ended" ? (
+            <>
+              <span>Last episode : </span>
+              완결 ({lastEpisodeDate})
+            </>
+          ) : (
+            <>
+              <span>Next episode : </span>
+              {nextEpisodeName === "" ? "-" : nextEpisodeName}
+              {nextEpisodeDate === "" ? "" : `(${nextEpisodeDate})`}
+            </>
+          )}
           <br />
           <br />
-          {overview}
+          {isLoading || !data ? <div>Loading...</div> : translate?.overview}
         </Summary>
       </HeaderWrapper>
     </Base>

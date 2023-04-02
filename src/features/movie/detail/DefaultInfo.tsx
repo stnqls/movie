@@ -69,7 +69,7 @@ const DefaultInfo: React.FC<Props> = ({
         </Header>
         <Summary>
           <span>Title : </span>
-          {title === "" ? "준비중입니다" : translate?.title}
+          {title === "" ? "준비중입니다" : translate?.title || title}
           <br />
           <span>Genres : </span>
           {genres === "" ? "준비중입니다" : genres}

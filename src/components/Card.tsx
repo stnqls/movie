@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import { AiOutlinePicture } from "react-icons/ai";
 import "slick-carousel/slick/slick.css";
 
 interface Props {
@@ -41,8 +42,10 @@ const Image = styled.img`
 const NoPoster = styled.div`
   width: 100%;
   height: 300px;
-  background-color: #000;
+  background-color: #e1e2e2;
   display: table;
+  border-radius: 4px;
+  position: relative;
 `;
 
 const NoPosterName = styled.h2`
@@ -50,7 +53,7 @@ const NoPosterName = styled.h2`
   text-align: center;
   margin: 0;
   vertical-align: middle;
-  color: #fff;
+  color: #333;
   font-weight: lighter;
   display: table-cell;
 `;
@@ -102,6 +105,17 @@ const Card: React.FC<Props> = ({
         <ImageWrapper>
           {isPoster === null ? (
             <NoPoster>
+              <AiOutlinePicture
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  color: "#333",
+                  position: "absolute",
+                  top: "70px",
+                  right: "50%",
+                  transform: "translateX(50%)",
+                }}
+              />
               <NoPosterName>등록된 포스터가 없습니다.</NoPosterName>
             </NoPoster>
           ) : (

@@ -129,6 +129,19 @@ interface Season {
   air_date: Date;
 }
 
+interface NextEpisode {
+  air_date: string;
+  id: number;
+  name: string;
+  season_number: number;
+}
+interface LastEpisode {
+  air_date: string;
+  id: number;
+  name: string;
+  season_number: number;
+}
+
 export interface TVDetail extends TV {
   created_by: Person[];
   episode_run_time: number[];
@@ -143,7 +156,9 @@ export interface TVDetail extends TV {
   seasons: Season[];
   status: string;
   type: string;
-  last_air_date: Date;
+  last_air_date: string;
+  production_countries: Country[];
+  next_episode_to_air: NextEpisode;
 }
 
 interface Image {

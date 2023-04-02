@@ -4,9 +4,13 @@ import Footer from "../components/Footer";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import useTvDetail from "../features/tv/useTvDetail";
-import { AiFillEye, AiOutlinePlus } from "react-icons/ai";
+import {
+  AiFillEye,
+  AiOutlinePlus,
+  AiFillStar,
+  AiOutlinePicture,
+} from "react-icons/ai";
 import { FaPen } from "react-icons/fa";
-import { FiMoreHorizontal } from "react-icons/fi";
 import { Rating } from "@mui/material";
 import DefaultInfo from "../features/tv/detail/DefaultInfo";
 import Similar from "../features/tv/detail/Similar";
@@ -28,7 +32,7 @@ const PosterContainer = styled.div`
 const Backdrop = styled.div`
   display: flex;
   width: 100%;
-  height: 394px;
+  height: 400px;
   background-image: linear-gradient(
     -180deg,
     rgba(0, 0, 0, 0.35) 2%,
@@ -38,65 +42,23 @@ const Backdrop = styled.div`
   overflow: hidden;
 `;
 
-const LeftBlur = styled.div`
-  flex: 1 1 1 0%;
-  background: rgb(178, 196, 229);
-`;
-
-const RightBlur = styled.div`
-  flex: 1 1 1 0%;
-  background: rgb(184, 184, 184);
-`;
-
-const LeftGradient = styled.div`
-  width: 150px;
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background-image: linear-gradient(
-    -90deg,
-    rgba(178, 196, 229, 0) 0%,
-    rgba(178, 196, 229),
-    100%
-  );
-`;
-
-const RightGradient = styled.div`
-  width: 150px;
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-
-  background-image: linear-gradient(
-    90deg,
-    rgba(184, 184, 184, 0) 0%,
-    rgba(184, 184, 184),
-    100%
-  );
-`;
-
 const BackdropImage = styled.div<{ imageUrl: string }>`
   background: url(${({ imageUrl }) => imageUrl}) center center / cover no-repeat;
-  /* width: 1024px; */
   width: 1200px;
   position: relative;
   top: auto;
   left: 50%;
   transform: translateX(-50%);
   height: 100%;
-  filter: none;
+  filter: blur(1.7px);
 `;
 
 const PosterWrapper = styled.div`
   position: absolute;
-  width: 166px;
-  height: 238px;
+  width: 185px;
+  height: 265px;
   border-bottom: solid 2px #fff;
-  top: -48px;
+  top: -60px;
   left: 0;
   border-radius: 3px;
   box-shadow: 0 0 2px rgb(0 0 0 / 30%);
@@ -115,14 +77,15 @@ const Main = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
   position: relative;
 `;
 
 const ContentWrapper = styled.div`
-  margin: 0px 0px 0px 191px;
+  margin: 0px 0px 0px 212px;
   text-align: left;
+  height: 200px;
 `;
 
 const Title = styled.h1`
@@ -146,6 +109,7 @@ const AverageRate = styled.div`
   margin-top: 14px;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
+  display: flex;
 `;
 
 const Actions = styled.div`
@@ -160,12 +124,15 @@ const StarRate = styled.div`
   height: 57px;
   margin: 0;
   text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
 `;
 
 const StarRateText = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
-  color: #787878;
+  margin-right: 5px;
 `;
 
 const RatingWrapper = styled.div`
@@ -198,7 +165,9 @@ const ActionButton = styled.button`
 
   > svg {
     margin-right: 7px;
-    &:hover {
+  }
+  &:hover {
+    > svg {
       transform: scale(1.4);
     }
   }
@@ -220,6 +189,23 @@ const ContentSectionContainer = styled.div`
   border-color: #e3e3e3;
 `;
 
+const Link = styled.a`
+  text-decoration: none;
+  color: black;
+`;
+
+const NoPoster = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #e1e2e2;
+  color: #333;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 type Params = {
   id?: string;
 };
@@ -228,14 +214,19 @@ const TvDetail: React.FC = () => {
   const { id } = useParams<Params>();
   const { isLoading, data } = useTvDetail(id!);
 
-  const year = useMemo(() => {
-    return data?.first_air_date?.split("-")[0] || "";
-  }, [data]);
+  // const year = useMemo(() => {
+  //   return data?.first_air_date?.split("-")[0] || "";
+  // }, [data]);
 
   const genres = useMemo(() => {
     return data?.genres?.map((genre) => genre.name).join("/") || "";
   }, [data]);
 
+  const country = data?.production_countries[0]?.name || "";
+  const nextEpisodeDate = data?.next_episode_to_air?.air_date || "";
+  const nextEpisodeName = data?.next_episode_to_air?.name || "";
+  const lastEpisodeDate = data?.last_air_date || "";
+  console.log(data);
   return (
     <Base>
       <Header />
@@ -247,31 +238,39 @@ const TvDetail: React.FC = () => {
             <TopInfo>
               <PosterContainer>
                 <Backdrop>
-                  <LeftBlur />
                   <BackdropImage
                     imageUrl={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.backdrop_path}`}
-                  >
-                    <LeftGradient />
-                    <RightGradient />
-                  </BackdropImage>
-                  <RightBlur />
+                  ></BackdropImage>
                 </Backdrop>
               </PosterContainer>
 
               <Main>
                 <Container>
                   <PosterWrapper>
-                    <Poster
-                      src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
-                    />
+                    {data.poster_path !== null ? (
+                      <Poster
+                        src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
+                      />
+                    ) : (
+                      <NoPoster>
+                        <AiOutlinePicture />
+                        No Image
+                      </NoPoster>
+                    )}
                   </PosterWrapper>
                   <ContentWrapper>
                     <Title>{data.name}</Title>
-                    <Keyword>
-                      {year} ・ {genres}
-                    </Keyword>
+                    <Keyword>{/* {year} ・ {genres} */}</Keyword>
                     <AverageRate>
-                      평균 ★{data.vote_average} ({data.vote_count}명)
+                      평점{" "}
+                      <AiFillStar
+                        style={{
+                          color: "rgb(255, 60, 11)",
+                          display: "block",
+                          margin: "2px 3px 0",
+                        }}
+                      />
+                      {data.vote_average.toFixed(2)} ({data.vote_count}명)
                     </AverageRate>
                     <Actions>
                       <StarRate>
@@ -289,15 +288,11 @@ const TvDetail: React.FC = () => {
                         </ActionButton>
                         <ActionButton>
                           <FaPen />
-                          댓글
+                          리뷰 쓰기
                         </ActionButton>
                         <ActionButton>
                           <AiFillEye />
-                          보는중
-                        </ActionButton>
-                        <ActionButton>
-                          <FiMoreHorizontal />
-                          더보기
+                          <Link href={`/tv/${id}/reviews`}>리뷰 보기</Link>
                         </ActionButton>
                       </ActionButtonContainer>
                     </Actions>
@@ -309,11 +304,16 @@ const TvDetail: React.FC = () => {
             <BottomInfo>
               <ContentSectionContainer>
                 <DefaultInfo
-                  title={data.name}
-                  year={year}
+                  title={data.original_name}
+                  year={data.first_air_date}
                   genres={genres}
                   overview={data.overview}
                   id={id!}
+                  contries={country}
+                  nextEpisodeDate={nextEpisodeDate}
+                  nextEpisodeName={nextEpisodeName}
+                  lastEpisodeDate={lastEpisodeDate}
+                  status={data.status}
                 />
                 <Similar id={id!} />
               </ContentSectionContainer>
