@@ -188,22 +188,22 @@ const Login: React.FC = () => {
             </Explain>
             <SubmitButton
               onClick={() => {
-                // navigate("/redirect", {
-                //   state: {
-                //     url: `https://www.themoviedb.org/authenticate/${window.sessionStorage.getItem(
-                //       "token"
-                //     )}?redirect_to=https://themovietv.netlify.app/
-                //   `,
-                //   },
-                // });
                 navigate("/redirect", {
                   state: {
                     url: `https://www.themoviedb.org/authenticate/${window.sessionStorage.getItem(
                       "token"
-                    )}?redirect_to=http://localhost:3000/
+                    )}?redirect_to=https://themovietv.netlify.app/
                   `,
                   },
                 });
+                // navigate("/redirect", {
+                //   state: {
+                //     url: `https://www.themoviedb.org/authenticate/${window.sessionStorage.getItem(
+                //       "token"
+                //     )}?redirect_to=http://localhost:3000/
+                //   `,
+                //   },
+                // });
               }}
             >
               로그인하러가기
