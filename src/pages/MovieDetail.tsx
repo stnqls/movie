@@ -1,6 +1,4 @@
 import React, { useMemo } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import useMovieDetail from "../features/movie/useMovieDetail";
@@ -207,97 +205,93 @@ const MovieDetail: React.FC = () => {
   }, [data]);
 
   return (
-    <>
-      <Header />
-      <Base>
-        <>
-          {isLoading || !data ? (
-            <div>Loading</div>
-          ) : (
-            <>
-              <TopInfo>
-                <PosterContainer>
-                  <Backdrop>
-                    <BackdropImage
-                      imageUrl={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.backdrop_path}`}
-                    ></BackdropImage>
-                  </Backdrop>
-                </PosterContainer>
+    <Base>
+      <>
+        {isLoading || !data ? (
+          <div>Loading</div>
+        ) : (
+          <>
+            <TopInfo>
+              <PosterContainer>
+                <Backdrop>
+                  <BackdropImage
+                    imageUrl={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.backdrop_path}`}
+                  ></BackdropImage>
+                </Backdrop>
+              </PosterContainer>
 
-                <Main>
-                  <Container>
-                    <PosterWrapper>
-                      {data.poster_path !== null ? (
-                        <Poster
-                          src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
-                        />
-                      ) : (
-                        <NoPoster>
-                          <AiOutlinePicture />
-                          No Image
-                        </NoPoster>
-                      )}
-                    </PosterWrapper>
-                    <ContentWrapper>
-                      <Title>{data.title}</Title>
-                      <AverageRate>
-                        평점
-                        <AiFillStar
-                          style={{
-                            color: "rgb(255, 60, 11)",
-                            display: "block",
-                            margin: "2px 3px 0",
-                          }}
-                        />
-                        {data.vote_average.toFixed(2)} ({data.vote_count}명)
-                      </AverageRate>
-                      <Actions>
-                        <StarRate>
-                          <StarRateText>평가하기</StarRateText>
-                          <Rating />
-                        </StarRate>
-                        <Divider />
+              <Main>
+                <Container>
+                  <PosterWrapper>
+                    {data.poster_path !== null ? (
+                      <Poster
+                        src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
+                      />
+                    ) : (
+                      <NoPoster>
+                        <AiOutlinePicture />
+                        No Image
+                      </NoPoster>
+                    )}
+                  </PosterWrapper>
+                  <ContentWrapper>
+                    <Title>{data.title}</Title>
+                    <AverageRate>
+                      평점
+                      <AiFillStar
+                        style={{
+                          color: "rgb(255, 60, 11)",
+                          display: "block",
+                          margin: "2px 3px 0",
+                        }}
+                      />
+                      {data.vote_average.toFixed(2)} ({data.vote_count}명)
+                    </AverageRate>
+                    <Actions>
+                      <StarRate>
+                        <StarRateText>평가하기</StarRateText>
+                        <Rating />
+                      </StarRate>
+                      <Divider />
 
-                        <ActionButtonContainer>
-                          <ActionButton>
-                            <AiOutlinePlus />
-                            보고싶어요
-                          </ActionButton>
-                          <ActionButton>
-                            <FaPen />
-                            리뷰 쓰기
-                          </ActionButton>
-                          <ActionButton>
-                            <AiOutlineEye />
-                            <Link href={`/movie/${id}/reviews`}>리뷰 보기</Link>
-                          </ActionButton>
-                        </ActionButtonContainer>
-                      </Actions>
-                    </ContentWrapper>
-                  </Container>
-                </Main>
-              </TopInfo>
+                      <ActionButtonContainer>
+                        <ActionButton>
+                          <AiOutlinePlus />
+                          보고싶어요
+                        </ActionButton>
+                        <ActionButton>
+                          <FaPen />
+                          리뷰 쓰기
+                        </ActionButton>
+                        <ActionButton>
+                          <AiOutlineEye />
+                          <Link href={`/movie/${id}/reviews`}>리뷰 보기</Link>
+                        </ActionButton>
+                      </ActionButtonContainer>
+                    </Actions>
+                  </ContentWrapper>
+                </Container>
+              </Main>
+            </TopInfo>
 
-              <BottomInfo>
-                <ContentSectionContainer>
-                  <DefaultInfo
-                    title={data.title}
-                    year={data.release_date}
-                    genres={genres}
-                    runtime={data.runtime}
-                    overview={data.overview}
-                    id={id!}
-                    contries={country}
-                  />
-                  <Similar id={id!} />
-                </ContentSectionContainer>
-              </BottomInfo>
-            </>
-          )}
-        </>
-      </Base>
-      <Footer />
-    </>
+            <BottomInfo>
+              <ContentSectionContainer>
+                <DefaultInfo
+                  title={data.title}
+                  year={data.release_date}
+                  genres={genres}
+                  runtime={data.runtime}
+                  overview={data.overview}
+                  id={id!}
+                  contries={country}
+                />
+                <Similar id={id!} />
+              </ContentSectionContainer>
+            </BottomInfo>
+          </>
+        )}
+      </>
+    </Base>
   );
 };
 export default MovieDetail;

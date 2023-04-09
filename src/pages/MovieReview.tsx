@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
 import useMovieReview from "../features/movie/useMovieReview";
 import styled from "@emotion/styled";
 import DetailInfo from "../features/movie/detail/DetailInfo";
@@ -133,7 +132,6 @@ const MovieReview: React.FC = () => {
   const { isLoading, data } = useMovieReview(id!);
   return (
     <>
-      <Header />
       <DetailInfo />
       {isLoading || !data ? (
         <div>Loading</div>

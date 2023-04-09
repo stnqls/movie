@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
 import styled from "@emotion/styled";
 import DetailInfo from "../features/tv/detail/DetailInfo";
 import useTvReview from "../features/tv/useTvReview";
@@ -133,7 +132,6 @@ const TvReview: React.FC = () => {
 
   return (
     <>
-      <Header />
       <DetailInfo />
       {isLoading || !data ? (
         <div>Loading</div>

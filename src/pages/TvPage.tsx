@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import AiringTodayTvSection from "../features/tv/airingToday";
 import LatestTvSection from "../features/tv/latest";
 import OnTheAirTvSection from "../features/tv/onTheAir";
@@ -19,19 +17,15 @@ const Container = styled.div`
 
 const TvPage = () => {
   return (
-    <>
-      <Header />
-      <Main>
-        <Container>
-          <LatestTvSection />
-          <AiringTodayTvSection />
-          <OnTheAirTvSection />
-          <PopularTvSection />
-          <TopRateTvSection />
-        </Container>
-      </Main>
-      <Footer />
-    </>
+    <Main>
+      <Container>
+        <LatestTvSection />
+        <AiringTodayTvSection />
+        <OnTheAirTvSection />
+        <PopularTvSection />
+        <TopRateTvSection />
+      </Container>
+    </Main>
   );
 };
 export default TvPage;

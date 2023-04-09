@@ -1,20 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled/macro";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
-import {
-  loginModalOpenState,
-  signupModalOpenState,
-} from "../features/app/atom";
+import { signupModalOpenState } from "../features/app/atom";
 
 import useMovieSearch from "../features/movie/useMovieSearch";
 import useClickOutside from "../hooks/useClickOutside";
 import Portal from "./Portal";
-import LoginModal from "../features/app/LoginModal";
 import SignupModal from "../features/app/SignupModal";
-import axios from "axios";
 
 const Base = styled.header`
   width: 100%;
@@ -182,24 +176,31 @@ const SignUp = styled.button`
   cursor: pointer;
   margin: 15px 0;
 `;
+const MyPage = styled.button`
+  border-radius: 6px;
+  font-weight: 500;
+  box-sizing: border-box;
+  min-width: 72px;
+  height: 32px;
+  background: transparent;
+  color: #222;
+  font-weight: 600;
+  font-size: 14px;
+  border: 2px solid rgb(255, 47, 110);
+  cursor: pointer;
+  margin: 15px 0;
+`;
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const pathname = window.location.pathname;
-  const navigate = useNavigate();
 
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
-  const [isLoginModalOpen, setIsLoginModalOpen] =
-    useRecoilState(loginModalOpenState);
   const [isSignupModalOpen, setIsSignupModalOpen] =
     useRecoilState(signupModalOpenState);
-
-  const handleLoginModal = (): void => {
-    !isLoginModalOpen && setIsLoginModalOpen(true);
-  };
 
   const handleSignup = (): void => {
     !isSignupModalOpen && setIsSignupModalOpen(true);
@@ -213,51 +214,16 @@ const Header: React.FC<Props> = () => {
 
   const { data: searchResult } = useMovieSearch(searchKeyword);
 
-  let token: string = "";
+  const [login, setLogin] = useState<Boolean>(false);
 
-  function getToken() {
-    axios({
-      method: "GET",
-      url: `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`,
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          // window.sessionStorage.setItem("token", res.data.request_token);
-          token = res.data.request_token;
-          navigate(
-            `https://www.themoviedb.org/authenticate/${token}?redirect_to=https://themovietv.netlify.app/`
-          );
-          createSession();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function createSession() {
-    axios({
-      method: "POST",
-      url: `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`,
-      data: {
-        request_token: token,
-      },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res);
-          window.sessionStorage.setItem("token", res.data.session_id);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    getToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (window.sessionStorage.getItem("token")) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  });
 
   return (
     <Base>
@@ -311,14 +277,25 @@ const Header: React.FC<Props> = () => {
                 </SearchResultList>
               </SearchResultWrapper>
             </SearchMenu>
-            <Menu>
-              <SignIn onClick={handleLoginModal}>로그인</SignIn>
-              {isLoginModalOpen && <Portal children={<LoginModal />} />}
-            </Menu>
-            <Menu>
-              <SignUp onClick={handleSignup}>회원가입</SignUp>
-              {isSignupModalOpen && <Portal children={<SignupModal />} />}
-            </Menu>
+            {login ? (
+              <Menu>
+                <Link href="/mypage">
+                  <MyPage>My Page</MyPage>
+                </Link>
+              </Menu>
+            ) : (
+              <>
+                <Menu>
+                  <Link href="/login">
+                    <SignIn>로그인</SignIn>
+                  </Link>
+                </Menu>
+                <Menu>
+                  <SignUp onClick={handleSignup}>회원가입</SignUp>
+                  {isSignupModalOpen && <Portal children={<SignupModal />} />}
+                </Menu>
+              </>
+            )}
           </MenuList>
         </MenuListWrapper>
       </Navigation>

@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import LatestMoviesSection from "../features/movie/latest";
 import NowPlayingSection from "../features/movie/nowPlaying";
 import PopularSection from "../features/movie/popular";
@@ -19,19 +17,15 @@ const Container = styled.div`
 
 const MoviePage = () => {
   return (
-    <>
-      <Header />
-      <Main>
-        <Container>
-          <LatestMoviesSection />
-          <NowPlayingSection />
-          <PopularSection />
-          <TopRateSection />
-          <UpcomingSection />
-        </Container>
-      </Main>
-      <Footer />
-    </>
+    <Main>
+      <Container>
+        <LatestMoviesSection />
+        <NowPlayingSection />
+        <PopularSection />
+        <TopRateSection />
+        <UpcomingSection />
+      </Container>
+    </Main>
   );
 };
 export default MoviePage;

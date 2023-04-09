@@ -1,6 +1,4 @@
 import React, { useMemo } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import useTvDetail from "../features/tv/useTvDetail";
@@ -229,99 +227,95 @@ const TvDetail: React.FC = () => {
   console.log(data);
   return (
     <Base>
-      <Header />
-      <>
-        {isLoading || !data ? (
-          <div>Loading</div>
-        ) : (
-          <>
-            <TopInfo>
-              <PosterContainer>
-                <Backdrop>
-                  <BackdropImage
-                    imageUrl={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.backdrop_path}`}
-                  ></BackdropImage>
-                </Backdrop>
-              </PosterContainer>
+      {isLoading || !data ? (
+        <div>Loading</div>
+      ) : (
+        <>
+          <TopInfo>
+            <PosterContainer>
+              <Backdrop>
+                <BackdropImage
+                  imageUrl={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.backdrop_path}`}
+                ></BackdropImage>
+              </Backdrop>
+            </PosterContainer>
 
-              <Main>
-                <Container>
-                  <PosterWrapper>
-                    {data.poster_path !== null ? (
-                      <Poster
-                        src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
-                      />
-                    ) : (
-                      <NoPoster>
-                        <AiOutlinePicture />
-                        No Image
-                      </NoPoster>
-                    )}
-                  </PosterWrapper>
-                  <ContentWrapper>
-                    <Title>{data.name}</Title>
-                    <Keyword>{/* {year} ・ {genres} */}</Keyword>
-                    <AverageRate>
-                      평점{" "}
-                      <AiFillStar
-                        style={{
-                          color: "rgb(255, 60, 11)",
-                          display: "block",
-                          margin: "2px 3px 0",
-                        }}
-                      />
-                      {data.vote_average.toFixed(2)} ({data.vote_count}명)
-                    </AverageRate>
-                    <Actions>
-                      <StarRate>
-                        <StarRateText>평가하기</StarRateText>
-                        <RatingWrapper>
-                          <Rating />
-                        </RatingWrapper>
-                      </StarRate>
-                      <Divider />
+            <Main>
+              <Container>
+                <PosterWrapper>
+                  {data.poster_path !== null ? (
+                    <Poster
+                      src={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.poster_path}`}
+                    />
+                  ) : (
+                    <NoPoster>
+                      <AiOutlinePicture />
+                      No Image
+                    </NoPoster>
+                  )}
+                </PosterWrapper>
+                <ContentWrapper>
+                  <Title>{data.name}</Title>
+                  <Keyword>{/* {year} ・ {genres} */}</Keyword>
+                  <AverageRate>
+                    평점{" "}
+                    <AiFillStar
+                      style={{
+                        color: "rgb(255, 60, 11)",
+                        display: "block",
+                        margin: "2px 3px 0",
+                      }}
+                    />
+                    {data.vote_average.toFixed(2)} ({data.vote_count}명)
+                  </AverageRate>
+                  <Actions>
+                    <StarRate>
+                      <StarRateText>평가하기</StarRateText>
+                      <RatingWrapper>
+                        <Rating />
+                      </RatingWrapper>
+                    </StarRate>
+                    <Divider />
 
-                      <ActionButtonContainer>
-                        <ActionButton>
-                          <AiOutlinePlus />
-                          보고싶어요
-                        </ActionButton>
-                        <ActionButton>
-                          <FaPen />
-                          리뷰 쓰기
-                        </ActionButton>
-                        <ActionButton>
-                          <AiFillEye />
-                          <Link href={`/tv/${id}/reviews`}>리뷰 보기</Link>
-                        </ActionButton>
-                      </ActionButtonContainer>
-                    </Actions>
-                  </ContentWrapper>
-                </Container>
-              </Main>
-            </TopInfo>
+                    <ActionButtonContainer>
+                      <ActionButton>
+                        <AiOutlinePlus />
+                        보고싶어요
+                      </ActionButton>
+                      <ActionButton>
+                        <FaPen />
+                        리뷰 쓰기
+                      </ActionButton>
+                      <ActionButton>
+                        <AiFillEye />
+                        <Link href={`/tv/${id}/reviews`}>리뷰 보기</Link>
+                      </ActionButton>
+                    </ActionButtonContainer>
+                  </Actions>
+                </ContentWrapper>
+              </Container>
+            </Main>
+          </TopInfo>
 
-            <BottomInfo>
-              <ContentSectionContainer>
-                <DefaultInfo
-                  title={data.original_name}
-                  year={data.first_air_date}
-                  genres={genres}
-                  overview={data.overview}
-                  id={id!}
-                  contries={country}
-                  nextEpisodeDate={nextEpisodeDate}
-                  nextEpisodeName={nextEpisodeName}
-                  lastEpisodeDate={lastEpisodeDate}
-                  status={data.status}
-                />
-                <Similar id={id!} />
-              </ContentSectionContainer>
-            </BottomInfo>
-          </>
-        )}
-      </>
-      <Footer />
+          <BottomInfo>
+            <ContentSectionContainer>
+              <DefaultInfo
+                title={data.original_name}
+                year={data.first_air_date}
+                genres={genres}
+                overview={data.overview}
+                id={id!}
+                contries={country}
+                nextEpisodeDate={nextEpisodeDate}
+                nextEpisodeName={nextEpisodeName}
+                lastEpisodeDate={lastEpisodeDate}
+                status={data.status}
+              />
+              <Similar id={id!} />
+            </ContentSectionContainer>
+          </BottomInfo>
+        </>
+      )}
     </Base>
   );
 };

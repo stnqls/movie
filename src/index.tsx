@@ -5,6 +5,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +17,9 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <RecoilRoot>
       <React.StrictMode>
+        <Header />
         <App />
+        <Footer />
       </React.StrictMode>
     </RecoilRoot>
   </QueryClientProvider>
