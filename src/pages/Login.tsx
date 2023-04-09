@@ -189,7 +189,7 @@ const Login: React.FC = () => {
                   state: {
                     url: `https://www.themoviedb.org/authenticate/${window.sessionStorage.getItem(
                       "token"
-                    )}
+                    )}?redirect_to=https://themovietv.netlify.app/
                   `,
                   },
                 });
