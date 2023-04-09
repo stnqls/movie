@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { AiOutlineClose } from "react-icons/ai";
 import Modal from "../../components/Modal";
 import { loginModalOpenState } from "./atom";
-// import axios from "axios";
+import axios from "axios";
 
 const Container = styled.div`
   width: 375px;
@@ -169,23 +169,23 @@ const LoginModal: React.FC<Props> = () => {
     setIsLoginModalOpen(false);
   };
 
-  // function login() {
-  //   axios({
-  //     method: "POST",
-  //     url: `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_API_KEY}`,
-  //     data: {
-  //       username: id,
-  //       password: pw,
-  //       request_token: window.sessionStorage.getItem("token"),
-  //     },
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
+  function login() {
+    axios({
+      method: "POST",
+      url: `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_API_KEY}`,
+      data: {
+        username: id,
+        password: pw,
+        request_token: window.sessionStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <Modal isOpen={isLoginModalOpen} onClose={handleClose}>
@@ -226,7 +226,7 @@ const LoginModal: React.FC<Props> = () => {
                   />
                 </InputLabel>
               </InputWrapper>
-              <SubmitButton>로그인</SubmitButton>
+              <SubmitButton onClick={login}>로그인</SubmitButton>
             </Form>
             <Explain>
               로그인시 사용되는 아이디와 비밀번호는, <br />

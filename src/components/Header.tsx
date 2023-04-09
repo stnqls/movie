@@ -230,7 +230,6 @@ const Header: React.FC<Props> = () => {
           );
           createSession();
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -246,7 +245,10 @@ const Header: React.FC<Props> = () => {
       },
     })
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) {
+          console.log(res);
+          window.sessionStorage.setItem("token", res.data.session_id);
+        }
       })
       .catch((err) => {
         console.log(err);
