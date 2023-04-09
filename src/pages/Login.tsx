@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -35,35 +35,35 @@ const Section = styled.section``;
 
 const Form = styled.form``;
 
-const InputWrapper = styled.div`
-  padding: 4px 0;
-  overflow: hidden;
-`;
+// const InputWrapper = styled.div`
+//   padding: 4px 0;
+//   overflow: hidden;
+// `;
 
-const InputLabel = styled.label`
-  display: flex;
-  align-items: center;
-  background-color: rgb(245, 245, 245);
-  width: 100%;
-  box-sizing: border-box;
-  height: 44px;
-  padding: 0 12px;
-  border-radius: 6px;
-  margin-top: 15px;
-`;
+// const InputLabel = styled.label`
+//   display: flex;
+//   align-items: center;
+//   background-color: rgb(245, 245, 245);
+//   width: 100%;
+//   box-sizing: border-box;
+//   height: 44px;
+//   padding: 0 12px;
+//   border-radius: 6px;
+//   margin-top: 15px;
+// `;
 
-const Input = styled.input`
-  background: transparent;
-  font-size: 16px;
-  font-weight: 400;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  caret-color: rgb(255, 47, 110);
-  outline: none;
-`;
+// const Input = styled.input`
+//   background: transparent;
+//   font-size: 16px;
+//   font-weight: 400;
+//   width: 100%;
+//   padding: 0;
+//   border: 0;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   caret-color: rgb(255, 47, 110);
+//   outline: none;
+// `;
 
 const Explain = styled.div`
   margin: 15px 0;
@@ -79,10 +79,10 @@ const SubmitButton = styled.button`
   background: rgb(255, 47, 110);
   color: rgb(255, 255, 255);
   text-align: center;
-  font-size: 17px;
+  font-size: 25px;
   font-weight: 400;
   width: 100%;
-  height: 44px;
+  height: 63px;
   border-radius: 6px;
   margin-top: 40px;
 `;
@@ -91,23 +91,23 @@ const FindWrapper = styled.div`
   margin-top: auto;
 `;
 
-const FindPasswordWrapper = styled.div`
-  font-size: 15px;
-  font-weight: 400;
-  text-align: center;
-  margin: 20px 0 14px;
-`;
+// const FindPasswordWrapper = styled.div`
+//   font-size: 15px;
+//   font-weight: 400;
+//   text-align: center;
+//   margin: 20px 0 14px;
+// `;
 
-const FindPassword = styled.a`
-  background: none;
-  padding: 0;
-  border: none;
-  margin: 0;
-  cursor: pointer;
-  color: rgb(255, 47, 110);
-  font-size: inherit;
-  text-decoration: none;
-`;
+// const FindPassword = styled.a`
+//   background: none;
+//   padding: 0;
+//   border: none;
+//   margin: 0;
+//   cursor: pointer;
+//   color: rgb(255, 47, 110);
+//   font-size: inherit;
+//   text-decoration: none;
+// `;
 
 const FindAccountWrapper = styled.div`
   font-size: 15px;
@@ -130,16 +130,16 @@ const FindAccount = styled.a`
 const Login: React.FC = () => {
   // const [id, setId] = useState<string | undefined>("");
   // const [pw, setPw] = useState<string | undefined>("");
-  const [input, setInput] = useState({ id: "", pw: "" });
+  // const [input, setInput] = useState({ id: "", pw: "" });
   // const { id, pw } = input;
 
-  const onChange = (e: { target: { name: string; value: string } }) => {
-    const { name, value } = e.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-  };
+  // const onChange = (e: { target: { name: string; value: string } }) => {
+  //   const { name, value } = e.target;
+  //   setInput({
+  //     ...input,
+  //     [name]: value,
+  //   });
+  // };
 
   const navigate = useNavigate();
 
@@ -168,7 +168,7 @@ const Login: React.FC = () => {
         <Title>로그인</Title>
         <Section>
           <Form>
-            <InputWrapper>
+            {/* <InputWrapper>
               <InputLabel>
                 <Input placeholder="이메일" onChange={onChange} name="id" />
               </InputLabel>
@@ -182,33 +182,44 @@ const Login: React.FC = () => {
                   type="password"
                 />
               </InputLabel>
-            </InputWrapper>
+            </InputWrapper> */}
+            <Explain>
+              MOVIETV에서는 TMDB에서 사용하는 아이디와 이메일로 로그인합니다.
+            </Explain>
             <SubmitButton
               onClick={() => {
+                // navigate("/redirect", {
+                //   state: {
+                //     url: `https://www.themoviedb.org/authenticate/${window.sessionStorage.getItem(
+                //       "token"
+                //     )}?redirect_to=https://themovietv.netlify.app/
+                //   `,
+                //   },
+                // });
                 navigate("/redirect", {
                   state: {
                     url: `https://www.themoviedb.org/authenticate/${window.sessionStorage.getItem(
                       "token"
-                    )}?redirect_to=https://themovietv.netlify.app/
+                    )}?redirect_to=http://localhost:3000/
                   `,
                   },
                 });
               }}
             >
-              로그인
+              로그인하러가기
             </SubmitButton>
           </Form>
-          <Explain>
+          {/* <Explain>
             로그인시 사용되는 아이디와 비밀번호는, <br />
             TMDB사이트의 아이디,비밀번호와동일합니다.
-          </Explain>
+          </Explain> */}
         </Section>
         <FindWrapper>
-          <FindPasswordWrapper>
+          {/* <FindPasswordWrapper>
             <FindPassword href="https://www.themoviedb.org/reset-password">
               비밀번호를 잊어버리셨나요?
             </FindPassword>
-          </FindPasswordWrapper>
+          </FindPasswordWrapper> */}
           <FindAccountWrapper>
             계정이 없으신가요?
             <FindAccount href="https://www.themoviedb.org/signup">

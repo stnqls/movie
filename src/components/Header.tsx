@@ -9,6 +9,7 @@ import useMovieSearch from "../features/movie/useMovieSearch";
 import useClickOutside from "../hooks/useClickOutside";
 import Portal from "./Portal";
 import SignupModal from "../features/app/SignupModal";
+import { redirect } from "react-router-dom";
 
 const Base = styled.header`
   width: 100%;
@@ -182,8 +183,8 @@ const MyPage = styled.button`
   box-sizing: border-box;
   min-width: 72px;
   height: 32px;
-  background: transparent;
-  color: #222;
+  background: rgb(255, 47, 110);
+  color: white;
   font-weight: 600;
   font-size: 14px;
   border: 2px solid rgb(255, 47, 110);
@@ -210,20 +211,45 @@ const Header: React.FC<Props> = () => {
     setSearchKeyword(e.target.value);
   };
 
+  const handleLogout = () => {
+    setIsLogin(false);
+    window.sessionStorage.removeItem("token");
+    window.sessionStorage.removeItem("sessionId");
+    redirect("/");
+  };
+
   useClickOutside(searchRef, () => setSearchKeyword(""));
 
   const { data: searchResult } = useMovieSearch(searchKeyword);
 
-  const [login, setLogin] = useState<Boolean>(false);
+  const [islogin, setIsLogin] = useState<Boolean>(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (window.sessionStorage.getItem("token")) {
-      setLogin(true);
+      setIsLogin(true);
     } else {
-      setLogin(false);
+      setIsLogin(false);
     }
   });
+
+  // const createSession = () => {
+  //   axios({
+  //     method: "POST",
+  //     url: `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`,
+  //     data: {
+  //       request_token: window.sessionStorage.getItem("token"),
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         window.sessionStorage.setItem("sessionId", res.data.session_id);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //     });
+  // };
 
   return (
     <Base>
@@ -277,21 +303,26 @@ const Header: React.FC<Props> = () => {
                 </SearchResultList>
               </SearchResultWrapper>
             </SearchMenu>
-            {login ? (
-              <Menu>
-                <Link href="/mypage">
-                  <MyPage>My Page</MyPage>
-                </Link>
-              </Menu>
+            {islogin ? (
+              <>
+                <Menu>
+                  <Link href="/mypage">
+                    <MyPage>My Page</MyPage>
+                  </Link>
+                </Menu>
+                <Menu>
+                  <SignUp onClick={handleLogout}>LOG OUT</SignUp>
+                </Menu>
+              </>
             ) : (
               <>
                 <Menu>
                   <Link href="/login">
-                    <SignIn>로그인</SignIn>
+                    <SignIn>LOG IN</SignIn>
                   </Link>
                 </Menu>
                 <Menu>
-                  <SignUp onClick={handleSignup}>회원가입</SignUp>
+                  <SignUp onClick={handleSignup}>SIGN UP</SignUp>
                   {isSignupModalOpen && <Portal children={<SignupModal />} />}
                 </Menu>
               </>
