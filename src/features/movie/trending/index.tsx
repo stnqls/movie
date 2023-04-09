@@ -2,7 +2,6 @@ import useTrendingMovie from "./useTrendingMovie";
 import styled from "@emotion/styled";
 import Slider from "../../../components/Slide";
 import Card from "../../../components/Card";
-import { useEffect, useReducer, useState } from "react";
 
 const Base = styled.div`
   margin-bottom: 42px;

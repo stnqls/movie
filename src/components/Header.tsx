@@ -226,7 +226,6 @@ const Header: React.FC<Props> = () => {
           token = res.data.request_token;
           navigate(
             `https://www.themoviedb.org/authenticate/${token}?redirect_to=https://themovietv.netlify.app/`
-            // `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:3000/`
           );
           createSession();
         }
@@ -257,6 +256,7 @@ const Header: React.FC<Props> = () => {
 
   useEffect(() => {
     getToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
