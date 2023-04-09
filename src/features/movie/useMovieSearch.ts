@@ -9,7 +9,6 @@ const useMovieSearch = (query: string) => {
     AxiosResponse<ListResponse<Movie>>,
     AxiosError
   >(["searchMovie", query], queryFn, { enabled: Boolean(query) });
-
   return {
     isLoading,
     isError,

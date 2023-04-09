@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled/macro";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 import {
@@ -13,6 +14,7 @@ import useClickOutside from "../hooks/useClickOutside";
 import Portal from "./Portal";
 import LoginModal from "../features/app/LoginModal";
 import SignupModal from "../features/app/SignupModal";
+import axios from "axios";
 
 const Base = styled.header`
   width: 100%;
@@ -186,6 +188,7 @@ interface Props {}
 const Header: React.FC<Props> = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const pathname = window.location.pathname;
+  const navigate = useNavigate();
 
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
@@ -210,13 +213,48 @@ const Header: React.FC<Props> = () => {
 
   const { data: searchResult } = useMovieSearch(searchKeyword);
 
+  let token: string = "";
+
+  function getToken() {
+    axios({
+      method: "GET",
+      url: `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          // window.sessionStorage.setItem("token", res.data.request_token);
+          token = res.data.request_token;
+          navigate(
+            `https://www.themoviedb.org/authenticate/${token}?redirect_to=https://themovietv.netlify.app/`
+            // `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:3000/`
+          );
+          createSession();
+        }
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function createSession() {
+    axios({
+      method: "POST",
+      url: `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`,
+      data: {
+        request_token: token,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
-    if (window.sessionStorage.getItem("token")) {
-      console.log("login");
-      console.log(window.sessionStorage.getItem("token"));
-    } else {
-      console.log("false");
-    }
+    getToken();
   }, []);
 
   return (

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { AiOutlineClose } from "react-icons/ai";
 import Modal from "../../components/Modal";
 import { loginModalOpenState } from "./atom";
+// import axios from "axios";
 
 const Container = styled.div`
   width: 375px;
@@ -154,6 +155,16 @@ const LoginModal: React.FC<Props> = () => {
     useRecoilState(loginModalOpenState);
   // const [id, setId] = useState<string | undefined>("");
   // const [password, setPassword] = useState<string | undefined>("");
+  const [input, setInput] = useState({ id: "", pw: "" });
+  const { id, pw } = input;
+
+  const onChange = (e: { target: { name: string; value: string } }) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+  };
   const handleClose = (): void => {
     setIsLoginModalOpen(false);
   };
@@ -164,42 +175,8 @@ const LoginModal: React.FC<Props> = () => {
   //     url: `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${process.env.REACT_APP_API_KEY}`,
   //     data: {
   //       username: id,
-  //       password: password,
+  //       password: pw,
   //       request_token: window.sessionStorage.getItem("token"),
-  //     },
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-  // let token: string = "";
-  // function getToken() {
-  //   axios({
-  //     method: "GET",
-  //     url: `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`,
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 200) {
-  //         // window.sessionStorage.setItem("token", res.data.request_token);
-  //         token = res.data.request_token;
-  //       }
-  //       console.log(res);
-  //       createSession();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // function createSession() {
-  //   axios({
-  //     method: "POST",
-  //     url: `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`,
-  //     data: {
-  //       request_token: token,
   //     },
   //   })
   //     .then((res) => {
@@ -228,9 +205,11 @@ const LoginModal: React.FC<Props> = () => {
                 <InputLabel>
                   <Input
                     placeholder="이메일"
-                    // onChange={(e) => {
-                    //   setId(e.target.value);
-                    // }}
+                    onChange={
+                      // setId(e.target.value);
+                      onChange
+                    }
+                    value={id}
                   />
                 </InputLabel>
               </InputWrapper>
@@ -238,9 +217,11 @@ const LoginModal: React.FC<Props> = () => {
                 <InputLabel>
                   <Input
                     placeholder="비밀번호"
-                    // onChange={(e) => {
-                    //   setPassword(e.target.value);
-                    // }}
+                    onChange={
+                      // setPassword(e.target.value);
+                      onChange
+                    }
+                    value={pw}
                     type="password"
                   />
                 </InputLabel>
